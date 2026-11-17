@@ -1,0 +1,164 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+:root {
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --text: #1F2937;
+  --muted: #6B7280;          /* 흰 배경 대비 약 4.8:1 (WCAG AA) */
+  --border: #E7E5E0;
+  --accent: #4F46E5;
+  --accent-dark: #4338CA;
+  --danger: #E11D48;
+  --font: "Pretendard Variable", Pretendard, system-ui, "Noto Sans KR", sans-serif;
+}
+
+/* 폰트: 아이콘 폰트가 깨지지 않도록 span에는 적용하지 않는다 */
+.stApp, .stApp p, .stApp label, .stApp input, .stApp button,
+.stApp h1, .stApp h2, .stApp h3, .stApp [data-testid="stCaptionContainer"],
+.stApp [data-testid="stAlert"], .stApp .item-name {
+  font-family: var(--font) !important;
+}
+
+/* 기본 메뉴 / 푸터 / 헤더 숨김 */
+#MainMenu, footer, [data-testid="stToolbar"], [data-testid="stDecoration"],
+[data-testid="stStatusWidget"] { display: none !important; }
+header[data-testid="stHeader"] { background: transparent; height: 0; }
+
+/* 영어 기본 힌트("Press Enter to submit form") 숨김. Enter 제출은 그대로 동작한다 */
+[data-testid="InputInstructions"] { display: none; }
+
+/* 제목 옆 앵커 링크 아이콘 숨김 */
+[data-testid="stHeaderActionElements"] { display: none; }
+
+/* <html lang> 보정용 스크립트 컨테이너 */
+.st-key-lang_shim { display: none; }
+
+.block-container { padding-top: 3rem; padding-bottom: 4rem; max-width: 640px; }
+
+/* 제목 */
+.stApp h1 {
+  font-weight: 800; font-size: 2rem; letter-spacing: -0.03em;
+  color: var(--text); padding-bottom: 0.5rem;
+}
+
+/* 추가 폼 */
+.st-key-add_form [data-testid="stForm"] {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 0.9rem;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 6px 16px rgba(17, 24, 39, 0.04);
+}
+
+/* 입력창 */
+.stApp [data-baseweb="input"], .stApp [data-baseweb="base-input"] {
+  border-radius: 12px !important; background: var(--surface);
+}
+.stApp [data-baseweb="input"] { border: 1px solid var(--border) !important; }
+.stApp [data-baseweb="input"]:focus-within {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+.stApp input { font-size: 1rem; color: var(--text); }
+
+/* 기본 버튼 / 주요 버튼 */
+.stApp .stButton > button, .stApp [data-testid="stFormSubmitButton"] > button {
+  border-radius: 12px; font-weight: 600; min-height: 2.6rem;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.05s;
+}
+.stApp button[kind="primary"], .stApp button[kind="primaryFormSubmit"] {
+  background: var(--accent); border: 1px solid var(--accent); color: #fff;
+}
+.stApp button[kind="primary"]:hover, .stApp button[kind="primaryFormSubmit"]:hover {
+  background: var(--accent-dark); border-color: var(--accent-dark); color: #fff;
+}
+.stApp button:active { transform: scale(0.98); }
+
+/* 진행 현황 */
+.stApp [data-testid="stProgress"] { margin-top: -0.6rem; }
+.stApp [data-testid="stCaptionContainer"] { color: var(--muted); font-weight: 500; }
+.stApp [data-testid="stProgress"] [data-baseweb="progress-bar"] > div > div {
+  background: var(--border);
+}
+.stApp [data-testid="stProgress"] [data-baseweb="progress-bar"] > div > div > div {
+  background: var(--accent);
+}
+
+/* 목록 아이템 카드 */
+[class*="st-key-item_"] {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 0.35rem 0.6rem 0.35rem 0.8rem;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+[class*="st-key-item_"]:hover {
+  border-color: #D6D3CC; box-shadow: 0 4px 12px rgba(17, 24, 39, 0.06);
+}
+[class*="st-key-item_"] [data-testid="stForm"] { border: none; padding: 0; }
+
+/* 아이템 이름 (st.html 로 출력) */
+.item-name {
+  display: block; font-size: 1.02rem; line-height: 1.5; color: var(--text);
+  overflow-wrap: anywhere; word-break: break-word;
+}
+.item-name.done {
+  color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1.5px;
+}
+
+/* 보기 행: 모바일에서도 한 줄 유지, 체크박스와 아이콘 버튼은 고정 폭 */
+[class*="st-key-row_"] [data-testid="stHorizontalBlock"] {
+  flex-wrap: nowrap !important; align-items: center; gap: 0.25rem;
+}
+[class*="st-key-row_"] [data-testid="stColumn"] { min-width: 0 !important; }
+[class*="st-key-row_"] [data-testid="stColumn"]:nth-child(1) { flex: 0 0 2.25rem !important; width: 2.25rem !important; }
+[class*="st-key-row_"] [data-testid="stColumn"]:nth-child(2) { flex: 1 1 0 !important; width: auto !important; padding-left: 0.2rem; }
+[class*="st-key-row_"] [data-testid="stColumn"]:nth-child(n+3) { flex: 0 0 2.75rem !important; width: 2.75rem !important; }
+[class*="st-key-row_"] [data-testid="stColumn"] > [data-testid="stVerticalBlock"] {
+  justify-content: center; gap: 0;
+}
+[class*="st-key-row_"] [data-testid="stElementContainer"] { margin: 0; }
+[class*="st-key-row_"] [data-testid="stCheckbox"] { margin: 0; transform: translateY(-6px); }
+[class*="st-key-row_"] [data-testid="stCheckbox"] label {
+  min-width: 2rem; min-height: 2.25rem; padding: 0; align-items: center; justify-content: center;
+}
+
+/* 수정 / 삭제 버튼: 44px 터치 영역, 평소엔 연하게 / 호버 시 강조.
+   글자는 화면에서만 숨기고(스크린리더용 이름 유지) 아이콘만 보여준다 */
+[class*="st-key-edit_"] button, [class*="st-key-del_"] button {
+  width: 2.75rem; height: 2.75rem; min-height: 2.75rem; padding: 0;
+  background: transparent; border: none; color: var(--muted); margin: 0 auto;
+  justify-content: center;
+}
+[class*="st-key-edit_"] button [data-testid="stMarkdownContainer"],
+[class*="st-key-del_"] button [data-testid="stMarkdownContainer"] {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+[class*="st-key-edit_"] button:hover { color: var(--accent); background: rgba(79, 70, 229, 0.08); }
+[class*="st-key-del_"] button:hover { color: var(--danger); background: rgba(225, 29, 72, 0.08); }
+[class*="st-key-edit_"] button:focus-visible, [class*="st-key-del_"] button:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 1px;
+}
+
+/* 수정 행: 데스크톱은 한 줄, 좁은 화면은 입력창 위 / 버튼 아래 두 줄 */
+[class*="st-key-editrow_"] [data-testid="stHorizontalBlock"] {
+  align-items: center; gap: 0.4rem; flex-wrap: wrap;
+}
+[class*="st-key-editrow_"] [data-testid="stColumn"] { min-width: 0 !important; }
+[class*="st-key-editrow_"] [data-testid="stColumn"]:nth-child(1) { flex: 1 1 12rem !important; }
+[class*="st-key-editrow_"] [data-testid="stColumn"]:nth-child(n+2) { flex: 0 0 4.5rem !important; width: 4.5rem !important; }
+[class*="st-key-editrow_"] button { white-space: nowrap; word-break: keep-all; }
+
+/* 완료 항목 모두 삭제 */
+.st-key-clear_btn button { color: var(--muted); border: 1px solid var(--border); background: transparent; }
+.st-key-clear_btn button:hover:not(:disabled) { color: var(--danger); border-color: var(--danger); background: rgba(225, 29, 72, 0.05); }
+
+/* 빈 목록 안내 */
+.empty-state { text-align: center; color: var(--muted); padding: 3rem 1rem; font-size: 1rem; }
+.empty-state .emoji { display: block; font-size: 2.6rem; margin-bottom: 0.6rem; }
+
+@media (max-width: 480px) {
+  .block-container { padding-left: 1rem; padding-right: 1rem; padding-top: 2rem; }
+  .stApp h1 { font-size: 1.6rem; }
+  /* 입력창은 한 줄 전체, 저장/취소는 아래 줄에서 절반씩 */
+  [class*="st-key-editrow_"] [data-testid="stColumn"]:nth-child(1) { flex: 1 1 100% !important; width: 100% !important; }
+  [class*="st-key-editrow_"] [data-testid="stColumn"]:nth-child(n+2) { flex: 1 1 calc(50% - 0.4rem) !important; width: auto !important; }
+}
